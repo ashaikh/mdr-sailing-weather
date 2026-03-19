@@ -32,7 +32,7 @@ fun ConditionsCard(conditions: WeatherConditions, modifier: Modifier = Modifier)
                 )
                 Spacer(Modifier.width(8.dp))
                 Text(
-                    "CONDITIONS",
+                    "CURRENT CONDITIONS",
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.primary
                 )

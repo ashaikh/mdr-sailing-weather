@@ -29,6 +29,6 @@ data class WeatherConditions(
             else -> "N"
         }
 
-    val isGoodSailing: Boolean
-        get() = windSpeed >= 5.0 && windSpeed <= 25.0
+    val isDinghySailing: Boolean
+        get() = windSpeed <= 8.0
 }

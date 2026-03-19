@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.sailingweather.model.ForecastPeriod
 import com.sailingweather.model.WeatherConditions
 import com.sailingweather.ui.components.ConditionsCard
 import com.sailingweather.ui.components.ForecastCard
@@ -42,7 +43,7 @@ fun WeatherScreen(viewModel: WeatherViewModel) {
                             modifier = Modifier.size(28.dp)
                         )
                         Spacer(Modifier.width(8.dp))
-                        Text("Sailing Weather", fontWeight = FontWeight.Bold)
+                        Text("Marina Del Rey Sailing", fontWeight = FontWeight.Bold)
                     }
                 },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
@@ -65,7 +66,7 @@ fun WeatherScreen(viewModel: WeatherViewModel) {
         ) {
             when (val state = uiState) {
                 is WeatherUiState.Loading -> LoadingContent()
-                is WeatherUiState.Success -> WeatherContent(state.conditions)
+                is WeatherUiState.Success -> WeatherContent(state.conditions, state.forecast)
                 is WeatherUiState.Error -> ErrorContent(state.message) { viewModel.refresh() }
             }
         }
@@ -73,7 +74,7 @@ fun WeatherScreen(viewModel: WeatherViewModel) {
 }
 
 @Composable
-private fun WeatherContent(conditions: WeatherConditions) {
+private fun WeatherContent(conditions: WeatherConditions, forecast: List<ForecastPeriod>) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -82,14 +83,14 @@ private fun WeatherContent(conditions: WeatherConditions) {
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         // Sailing status badge
-        if (conditions.isGoodSailing) {
+        if (conditions.isDinghySailing) {
             Surface(
                 color = GoodSailing.copy(alpha = 0.15f),
                 shape = MaterialTheme.shapes.small,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
                 Text(
-                    "Good Sailing Conditions",
+                    "Good for Dinghy Sailing",
                     style = MaterialTheme.typography.labelLarge,
                     color = GoodSailing,
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp)
@@ -108,7 +109,7 @@ private fun WeatherContent(conditions: WeatherConditions) {
         WindCard(conditions)
         ConditionsCard(conditions)
         SunMoonCard(conditions)
-        ForecastCard(conditions)
+        ForecastCard(conditions, forecast)
 
         Spacer(Modifier.height(16.dp))
     }
