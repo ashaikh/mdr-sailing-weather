@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Sailboat adaptive icon foreground.
+  Canvas: 108x108dp. Safe zone (visible area): roughly 18,18 to 90,90 (72dp inner square).
+  All paths are white, centered around 54,54.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Main sail: tall triangle pointing up-right, mast at x=50 -->
+    <!-- Base: 50,75 → 80,75  Apex: 50,22 -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M50,22 L80,75 L50,75 Z" />
+
+    <!-- Jib sail: smaller triangle in front of main sail -->
+    <!-- Mast top at 50,30, forward point at 38,70, base at 50,70 -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M50,30 L36,70 L50,70 Z" />
+
+    <!-- Hull: a flat curved boat bottom -->
+    <!-- A simple rounded trapezoid: wider at deck, narrower keel point -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M32,76 Q54,86 76,76 L72,80 Q54,91 36,80 Z" />
+
+    <!-- Mast: thin vertical line from hull to sail apex -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="1.5"
+        android:pathData="M50,75 L50,22" />
+
+    <!-- Wind lines to the left of the boat (3 short curved lines) -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M26,36 Q29,34 26,32" />
+
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M22,44 Q26,42 22,40" />
+
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M25,52 Q29,50 25,48" />
+
+</vector>

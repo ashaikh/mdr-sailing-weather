@@ -10,6 +10,15 @@ android {
     namespace = "com.sailingweather"
     compileSdk = 35
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("../release-keystore.jks")
+            storePassword = "SailingWeather2026"
+            keyAlias = "sailing-weather"
+            keyPassword = "SailingWeather2026"
+        }
+    }
+
     defaultConfig {
         applicationId = "com.sailingweather"
         minSdk = 26
@@ -25,6 +34,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
