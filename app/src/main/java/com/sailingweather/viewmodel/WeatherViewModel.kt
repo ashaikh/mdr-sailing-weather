@@ -2,6 +2,7 @@ package com.sailingweather.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sailingweather.data.Analytics
 import com.sailingweather.data.ForecastDataSource
 import com.sailingweather.data.WeatherDataSource
 import com.sailingweather.model.ForecastPeriod
@@ -33,7 +34,7 @@ class WeatherViewModel : ViewModel() {
     val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
 
     init {
-        refresh()
+        fetchData("app_open")
         startAutoRefresh()
     }
 
@@ -41,7 +42,7 @@ class WeatherViewModel : ViewModel() {
         viewModelScope.launch {
             while (true) {
                 delay(10 * 60 * 1000L) // 10 minutes, matches station update interval
-                fetchData()
+                fetchData("auto")
             }
         }
     }
@@ -49,21 +50,36 @@ class WeatherViewModel : ViewModel() {
     fun refresh() {
         viewModelScope.launch {
             _isRefreshing.value = true
-            fetchData()
+            fetchData("manual")
             _isRefreshing.value = false
         }
     }
 
-    private suspend fun fetchData() {
-        dataSource.fetchConditions()
-            .onSuccess { conditions ->
-                val forecast = forecastSource.fetchForecast().getOrDefault(emptyList())
-                _uiState.value = WeatherUiState.Success(conditions, forecast)
-            }
-            .onFailure { error ->
-                _uiState.value = WeatherUiState.Error(
-                    error.message ?: "Failed to fetch weather data"
-                )
-            }
+    fun pullToRefresh() {
+        viewModelScope.launch {
+            _isRefreshing.value = true
+            fetchData("pull_to_refresh")
+            _isRefreshing.value = false
+        }
+    }
+
+    private fun fetchData(trigger: String) {
+        viewModelScope.launch {
+            Analytics.logRefresh(trigger)
+            dataSource.fetchConditions()
+                .onSuccess { conditions ->
+                    Analytics.logWeatherLoaded(conditions)
+                    val forecast = forecastSource.fetchForecast().getOrDefault(emptyList())
+                    if (forecast.isNotEmpty()) {
+                        Analytics.logForecastLoaded(forecast)
+                    }
+                    _uiState.value = WeatherUiState.Success(conditions, forecast)
+                }
+                .onFailure { error ->
+                    val message = error.message ?: "Failed to fetch weather data"
+                    Analytics.logWeatherError(message)
+                    _uiState.value = WeatherUiState.Error(message)
+                }
+        }
     }
 }

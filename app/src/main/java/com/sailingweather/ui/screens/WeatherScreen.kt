@@ -59,7 +59,7 @@ fun WeatherScreen(viewModel: WeatherViewModel) {
     ) { padding ->
         PullToRefreshBox(
             isRefreshing = isRefreshing,
-            onRefresh = { viewModel.refresh() },
+            onRefresh = { viewModel.pullToRefresh() },
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
