@@ -15,7 +15,11 @@ A beautiful Android app that delivers real-time sailing weather conditions for M
 
 ## Screenshots
 
-*Coming soon*
+<p align="center">
+  <img src="screenshots/main.png" width="300" alt="Main weather view" />
+  &nbsp;&nbsp;
+  <img src="screenshots/forecast.png" width="300" alt="Forecast view" />
+</p>
 
 ## Tech Stack
 
