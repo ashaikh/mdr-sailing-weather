@@ -91,25 +91,43 @@ app/src/main/java/com/sailingweather/
 - **Release AAB:** `app/build/outputs/bundle/release/app-release.aab` (signed, 13MB)
 
 ## Play Store Status
-- **Developer account:** foleymobileapps@gmail.com — registered, $25 paid
-- **Identity verification:** Submitted, waiting for Google approval (24-48 hours)
-- **Store listing status:** Not yet created
+- **Developer account:** foleymobileapps@gmail.com — approved, $25 paid
+- **Identity verification:** Approved (March 2026)
+- **Store listing status:** Complete and submitted for review
+- **Current track:** Closed testing — submitted for Google review (March 19, 2026)
+- **Version uploaded:** versionCode 2, versionName 1.0
+- **Production access:** Requires 20 opted-in testers for 14 days (Google policy for new accounts)
+- **Internal test link:** https://play.google.com/apps/internaltest/4701244707637686545
 
-## What's Ready for Play Store
-- [x] Release AAB (signed)
-- [x] App icon (adaptive: sailboat on navy gradient)
-- [x] Privacy policy (live on GitHub Pages)
-- [x] Screenshots (2 dark mode — main view + forecast scroll)
+## Play Store Completed
+- [x] Developer account approved
+- [x] App created in Play Console
+- [x] Release AAB (signed, versionCode 2)
+- [x] App icon (adaptive + 512x512 PNG: play_store_icon_512.png)
+- [x] Feature graphic (1024x500: play_store_feature_graphic.png)
+- [x] Privacy policy (live: https://ashaikh.github.io/mdr-sailing-weather/privacy-policy.html)
+- [x] Screenshots (4 total: 2 dark mode + 2 light mode)
+- [x] Store listing text (short + full description)
+- [x] Content rating questionnaire (Rated Everyone)
+- [x] Data safety form (Firebase Analytics + Crashlytics declared)
+- [x] Advertising ID declaration (Yes — Analytics)
+- [x] AD_ID permission removed from manifest (tools:node="remove")
+- [x] Closed testing release submitted for review
 - [x] Firebase Analytics + Crashlytics integrated
 
-## What's Left for Play Store
-- [ ] Google identity verification (waiting)
-- [ ] Store listing text (short description 80 chars + full description)
-- [ ] Feature graphic (1024x500 banner)
-- [ ] Content rating questionnaire (2 min, answer "no" to everything)
-- [ ] Data safety form (declare Firebase Analytics collection)
-- [ ] Upload AAB and submit for review
-- [ ] Consider: light mode screenshot, 512x512 high-res icon PNG for store
+## What's Left for Production
+- [ ] Google review of closed testing release (1-3 days)
+- [ ] Recruit 20 testers to opt in via closed testing link
+- [ ] 14-day closed testing period
+- [ ] Promote to Production
+
+## Keystore
+- **Keystore file:** `release-keystore.jks` (in project root, gitignored)
+- **Backup:** `MDR Sailing Apps Files/release-keystore.jks`
+- **Keystore password:** SailingWeather2026
+- **Key alias:** sailing-weather
+- **Key password:** SailingWeather2026
+- **CRITICAL:** Without this keystore you cannot update the app on the Play Store
 
 ## Git History
 ```
